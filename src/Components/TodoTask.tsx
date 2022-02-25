@@ -18,6 +18,10 @@ const TodoTask = ({task,compliteTask}:Props) => {
                 task?.deadLine
             }
             </h4>
+         {/*    <button
+                    onClick={() => props.handleAddToCart(props.product)}
+                    className="btn-regular"
+                > add to cart</button> */}
            {/*  <button
              onClick={()=>{
                 compliteTask(ITask.taskName);

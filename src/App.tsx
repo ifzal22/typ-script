@@ -1,10 +1,11 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import TodoTask from './Components/TodoTask';
+import { addToDb } from './Components/utilities/Fakedb';
 import { ITask } from './Interface';
 const App:FC = () => {
     const [task,setTask]= useState<string>('');
     const [deadLine,SetDeadLine]= useState<number>(0);
-    const [todoList,setTodoList]= useState<ITask[]>([]);
+    const [todoList,setTodoList]= useState<any>([]);
 
   
 
@@ -27,7 +28,7 @@ const addProduct = () : void=>{
   setTask('');
   SetDeadLine(0)
 }
-const compliteTask = (taskDelete:string):void=>{
+const compliteTask= (taskDelete:string):void=>{
 setTodoList(todoList.filter((task)=>{
   return task.taskName !== taskDelete;
 }))
@@ -39,6 +40,13 @@ setTodoList(todoList.filter((task)=>{
 // local storage 
 
 
+const handleAddToCart = (product:string):void => {
+
+ const newCArt = [ ...todoList, product]
+ setTodoList(newCArt)
+
+addToDb(product)
+}
 
 
 
@@ -49,6 +57,7 @@ setTodoList(todoList.filter((task)=>{
       <input type="text" value={task} name="task" onChange={handleChange} />
       <input type="number" value={deadLine} name="dedline" onChange={handleChange}/>
       <button onClick={addProduct}>Add Product</button>
+      
 <div>
   {todoList.map((task:ITask,key:number)=>{
     return<TodoTask key={key} task={task}compliteTask={compliteTask}></TodoTask>

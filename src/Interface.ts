@@ -1,4 +1,4 @@
-export interface ITask {
-  taskName:string;
+export interface ITask  {
+  taskName:string | any;
   deadLine: number;  
 }
